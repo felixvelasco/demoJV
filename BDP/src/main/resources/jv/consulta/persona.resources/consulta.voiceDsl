@@ -1,0 +1,10 @@
+input consulta
+
+grammars{
+	dtmf "builtin:dtmf/digits"
+}
+audios{
+ 	main: 
+ 		say wording "Por favor, pulse el número de su documento nacional de identidad." 
+}
+
