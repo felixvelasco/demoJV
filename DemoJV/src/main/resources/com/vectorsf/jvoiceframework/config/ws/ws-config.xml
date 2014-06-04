@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<webservices>
+
+    <!-- 
+    namespace: wsdl targetNameSpace or tns
+    name: service port name / endpoint name
+    endpoint: target endpoint url
+    handlers: handlers to apply to each web service 
+            (loggingHandler, usernameTokenHandler or any custom handler that implements WebServiceHandler interface).
+    --> 
+  
+    <!-- Examples:
+    <webservice namespace="http://bluedash.net/ws" name="HelloService">
+        <endpoint>http://localhost:8080/ws/SayHello</endpoint>
+        <handlers>
+            <handler name="usernameTokenHandler">
+                <configuration>
+                    <username></username>
+                    <password></password>
+                </configuration>
+            </handler>
+            <handler name="loggingHandler"/>
+            <handler name="myHandler"/>     
+        </handlers>     
+    </webservice>
+    
+    <webservice namespace="http://bluedash.net/ws" name="OtherHelloService">
+        <endpoint>http://localhost:8080/ws/otherSayHello</endpoint>
+        <handlers>
+            <handler name="loggingHandler"/>
+        </handlers>     
+    </webservice>
+    -->   
+    
+</webservices>
+
