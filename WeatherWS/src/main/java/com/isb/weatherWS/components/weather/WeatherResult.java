@@ -1,5 +1,7 @@
 package com.isb.weatherWS.components.weather;
 
+import java.io.Serializable;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -7,7 +9,9 @@ import com.cdyne.ws.weatherws.WeatherReturn;
 
 @Component
 @Scope("prototype")
-public class WeatherResult {
+public class WeatherResult implements Serializable {
+
+	private static final long serialVersionUID = -1520868337364703561L;
 
 	private String locution;
 
