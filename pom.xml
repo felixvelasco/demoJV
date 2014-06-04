@@ -9,6 +9,14 @@
 		<module>DemoJV</module>
 		<module>WeatherWS</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>jvoice-snapshots</id>
+			<name>jVoice Maven Repository</name>
+			<url>https://repository-felixvelasco.forge.cloudbees.com/snapshot/snapshot</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
 	<distributionManagement>
 		<snapshotRepository>
 			<id>jvoice-snapshots</id>
