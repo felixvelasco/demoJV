@@ -11,6 +11,10 @@ public class WeatherResult {
 
 	private String locution;
 
+	public WeatherResult() {
+		setLocution("Información no disponible");
+	}
+
 	public WeatherResult(WeatherReturn response) {
 		if (response.isSuccess()) {
 			String loc = "La temperatura actual en " + response.getCity() + " es de " + response.getTemperature() + " grados fahrenheit.";
