@@ -2,7 +2,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>WeatherWS</groupId>
   <artifactId>WeatherWS</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
   <name>WeatherWS</name>
   <description/>
   <properties>
@@ -88,4 +87,10 @@
       </plugin>
     </plugins>
   </build>
+  <parent>
+  	<groupId>DemoJV</groupId>
+  	<artifactId>parent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>..</relativePath>
+  </parent>
 </project>
