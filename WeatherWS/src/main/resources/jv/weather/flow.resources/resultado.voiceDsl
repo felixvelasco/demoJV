@@ -5,5 +5,5 @@ output resultado {
 
 audios{
 	main:
-		say wording "${weatherResult.locution"
+		say wording "${weatherResult.locution}"
 }
