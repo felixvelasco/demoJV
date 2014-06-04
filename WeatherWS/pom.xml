@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>WeatherWS</groupId>
   <artifactId>WeatherWS</artifactId>
   <name>WeatherWS</name>
-  <description/>
+  <description></description>
   <properties>
     <wsdlRoot>src/main/resources/META-INF/wsdl</wsdlRoot>
   </properties>
@@ -80,7 +82,12 @@
                   <extraarg>-verbose</extraarg>
                 </extraargs>
               </defaultOptions>
-              <wsdlOptions/>
+              <wsdlOptions>
+                <wsdlOption>
+                  <wsdlLocation>http://localhost/wsdl/Weather.wsdl</wsdlLocation>
+                  <wsdl>${wsdlRoot}/Weather/Weather.wsdl</wsdl>
+                </wsdlOption>
+              </wsdlOptions>
             </configuration>
           </execution>
         </executions>
