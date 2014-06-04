@@ -23,6 +23,11 @@
     	<artifactId>WeatherWS</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+    	<groupId>DemoJV</groupId>
+    	<artifactId>Movimientos</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
