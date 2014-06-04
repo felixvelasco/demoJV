@@ -1,0 +1,9 @@
+output resultado {
+	flush true
+}
+
+
+audios{
+	main:
+		say wording "${weatherResult.locution"
+}

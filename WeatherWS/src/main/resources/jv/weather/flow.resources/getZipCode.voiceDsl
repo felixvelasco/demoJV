@@ -1,0 +1,17 @@
+input getZipCode
+
+grammars{
+	dtmf "builtin:dtmf/digits?length=5"
+}
+audios{
+ 	main: 
+ 		say wording "Pulse los 5 digitos del codigo postal."
+
+ 	noinput:
+ 		say wording "Por favor, pulse los 5 digitos del codigo postal en el teclado de su teléfono."
+
+ 	nomatch: 
+ 		say wording "Código postal incorrecto."
+ 		say wording "Por favor, pulse los 5 digitos del codigo postal en el teclado de su teléfono"
+}
+
