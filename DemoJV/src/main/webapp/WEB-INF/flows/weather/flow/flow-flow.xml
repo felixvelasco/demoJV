@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"	
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+xsi:schemaLocation="http://www.springframework.org/schema/webflow
+http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd"
+parent="_WeatherWSEventsHandlers/eventsHandlers"
+start-state= "_jVoiceCheckInit" >
+
+<on-start>
+<evaluate expression="com_isb_weatherWS_components_weather_Flow" result="flowScope.it"></evaluate>
+<evaluate expression="weatherResult" result="flowScope.weatherResult"></evaluate>
+
+</on-start>
+
+
+<action-state id="_jVoiceCheckInit">
+	<on-entry>
+		<set name="flowScope.jvoiceCurrentFlowName" value="'flow'"/>
+	</on-entry>
+	<evaluate expression="jVoiceArchData.initialized" />
+	<transition on="no" to="_jVoiceInit"/>
+	<transition to="preguntarZipCode"/>
+</action-state>
+
+<view-state id="_jVoiceInit" view="#{flowProcessor.getRenderer().getInitView()}" model="jVoiceArchData">
+	<transition to="preguntarZipCode" >
+		<set name="jVoiceArchData.initialized" value="true"/>
+	</transition>
+</view-state>
+<end-state id="Final" view="#{flowProcessor.getRenderer().getView()}">
+	<output name="result" value="''" />
+</end-state>
+<action-state id="preguntarZipCode">
+	<on-entry>
+		<evaluate expression="jVoiceArchInput" result="flashScope.preguntarZipCode"></evaluate>
+		<set name="flowScope.jvoiceCurrentStateName" value="'preguntarZipCode'"/>
+		<set name="flashScope.preguntarZipCode.name" value="'preguntarZipCode'" />
+		
+		<evaluate expression="jVoiceArchGrammar" result="flashScope.grammar1" />
+		<set name="flashScope.grammar1.src" value="'builtin:dtmf/digits?length=5'"/>
+		<set name="flashScope.grammar1.mode" value="'dtmf'"/>
+		<evaluate expression="flashScope.preguntarZipCode.grammars.add(flashScope.grammar1)" />
+		
+			        <evaluate expression="jVoiceArchAudioItem" result="flashScope.preguntarZipCodemainAudios1"/><evaluate expression="jVoiceArchWording" result="flashScope.preguntarZipCodemainAudios1.wording"/>
+			        <set name="flashScope.preguntarZipCodemainAudios1.wording.text" value="&apos;Pulse los 5 digitos del codigo postal.&apos;"/>
+			        <evaluate expression="flashScope.preguntarZipCode.mainAudios.add(flashScope.preguntarZipCodemainAudios1)"/>
+			        <evaluate expression="jVoiceArchAudioItem" result="flashScope.preguntarZipCodenoMatchAudios1"/><evaluate expression="jVoiceArchWording" result="flashScope.preguntarZipCodenoMatchAudios1.wording"/>
+			        <set name="flashScope.preguntarZipCodenoMatchAudios1.wording.text" value="&apos;Código postal incorrecto.&apos;"/>
+			        <evaluate expression="flashScope.preguntarZipCode.noMatchAudios.add(flashScope.preguntarZipCodenoMatchAudios1)"/><evaluate expression="jVoiceArchAudioItem" result="flashScope.preguntarZipCodenoMatchAudios2"/><evaluate expression="jVoiceArchWording" result="flashScope.preguntarZipCodenoMatchAudios2.wording"/>
+			        <set name="flashScope.preguntarZipCodenoMatchAudios2.wording.text" value="&apos;Por favor, pulse los 5 digitos del codigo postal en el teclado de su teléfono&apos;"/>
+			        <evaluate expression="flashScope.preguntarZipCode.noMatchAudios.add(flashScope.preguntarZipCodenoMatchAudios2)"/>
+			        <evaluate expression="jVoiceArchAudioItem" result="flashScope.preguntarZipCodenoInputAudios1"/><evaluate expression="jVoiceArchWording" result="flashScope.preguntarZipCodenoInputAudios1.wording"/>
+			        <set name="flashScope.preguntarZipCodenoInputAudios1.wording.text" value="&apos;Por favor, pulse los 5 digitos del codigo postal en el teclado de su teléfono.&apos;"/>
+			        <evaluate expression="flashScope.preguntarZipCode.noInputAudios.add(flashScope.preguntarZipCodenoInputAudios1)"/>
+	</on-entry>
+	<evaluate expression="flowProcessor.process(flashScope.preguntarZipCode)"/>
+	<transition to="render_preguntarZipCode"/>
+</action-state>
+
+<view-state id="render_preguntarZipCode" view="#{flowProcessor.getRenderer().getView()}" model="lastInputResult">
+	<transition on="match" to="getWeatherInfoFromWS"/>
+</view-state>
+<action-state id="getWeatherInfoFromWS">
+	<on-entry>
+		<set name="flowScope.jvoiceCurrentStateName" value="'getWeatherInfoFromWS'"/>
+	</on-entry>
+   <evaluate expression="flowScope.it.getWeatherInfo(lastInputResult.interpretation)"
+   result="weatherResult"/>
+   
+
+	<transition to="resultado"></transition>
+</action-state>
+<action-state id="resultado">
+	<on-entry>
+		<set name="flowScope.jvoiceCurrentStateName" value="'resultado'"/>
+		<evaluate expression="jVoiceArchOutput" result="flashScope.resultado"/>
+		<set name="flashScope.resultado.flush" value="&apos;true&apos;" />
+		<evaluate expression="jVoiceArchAudioItem" result="flashScope.resultadoaudioItems1"/><evaluate expression="jVoiceArchWording" result="flashScope.resultadoaudioItems1.wording"/>
+		<set name="flashScope.resultadoaudioItems1.wording.text" value="&apos;&apos; + weatherResult.locution&apos;"/>
+		<evaluate expression="flashScope.resultado.audioItems.add(flashScope.resultadoaudioItems1)"/>
+	</on-entry>
+	
+	<evaluate expression="flowProcessor.process(flashScope.resultado)"/>
+	
+<transition to="render_resultado"/>
+</action-state>
+
+<view-state id="render_resultado" view="#{flowProcessor.getRenderer().getView()}">
+	<transition on="success" to="Final"/>
+</view-state>
+
+
+</flow> 

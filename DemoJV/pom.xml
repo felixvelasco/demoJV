@@ -18,6 +18,11 @@
       <artifactId>jvoiceframework-flow</artifactId>
       <version>1.6.0</version>
     </dependency>
+    <dependency>
+    	<groupId>DemoJV</groupId>
+    	<artifactId>WeatherWS</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
