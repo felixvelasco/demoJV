@@ -8,6 +8,7 @@
 	<modules>
 		<module>DemoJV</module>
 		<module>WeatherWS</module>
+		<module>BDP</module>
 	</modules>
 	<distributionManagement>
 		<snapshotRepository>
